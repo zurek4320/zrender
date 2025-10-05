@@ -75,7 +75,7 @@ def win_closing(window):
     return data["closing"]
 
 def win_make(width, height, title, resizable=True):
-    print("Made with use of ZRender.")
+    print("Made with use of ZRender. Github: https://github.com/zurek4320/zrender")
 
     if not glfw.init():
         raise Exception("GLFW could not be initialized")
