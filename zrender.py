@@ -1,4 +1,3 @@
-# zrender.py
 import glfw, math
 from OpenGL.GL import *
 from PIL import Image, ImageDraw, ImageFont
@@ -55,6 +54,8 @@ def win_rtext(x, y, text, r, g, b, a, font_size=32, window_width=800, window_hei
     s_y = img.height / window_height * 2
     cx = (x / window_width) * 2 - 1
     cy = (y / window_height) * 2 - 1
+
+    glColor4f(1, 1, 1, 1)
 
     # Draw textured quad
     glBegin(GL_QUADS)
@@ -188,6 +189,25 @@ def win_rsquare(x, y, r, g, b, a, size=50, deg=0, window_width=800, window_heigh
     cy = (y / window_height) * 2 - 1
     s_x = (size / window_width) * 2
     s_y = (size / window_height) * 2
+
+    vertices = [(-s_x, s_y), (s_x, s_y), (s_x, -s_y), (-s_x, -s_y)]
+    rad = math.radians(deg)
+
+    for vx, vy in vertices:
+        rx = vx * math.cos(rad) - vy * math.sin(rad) + cx
+        ry = vx * math.sin(rad) + vy * math.cos(rad) + cy
+        glVertex2f(rx, ry)
+
+    glEnd()
+
+def win_rrectangle(x, y, r, g, b, a, sizex=100, sizey=50, deg=0, window_width=800, window_height=600):
+    glColor4f(r/255, g/255, b/255, a)
+    glBegin(GL_QUADS)
+
+    cx = (x / window_width) * 2 - 1
+    cy = (y / window_height) * 2 - 1
+    s_x = (sizex / window_width) * 2
+    s_y = (sizey / window_height) * 2
 
     vertices = [(-s_x, s_y), (s_x, s_y), (s_x, -s_y), (-s_x, -s_y)]
     rad = math.radians(deg)
